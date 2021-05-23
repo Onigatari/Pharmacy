@@ -1,0 +1,60 @@
+{% extends 'database/layout_db.html' %}
+
+{% block title %} Добавить {% endblock %}
+
+{% block content%}
+<style type="text/css">
+    <!--
+    .table_container {
+        margin-top: 25px;
+        margin-left: 15em;
+        margin-right: 15em;
+    }
+    -->
+</style>
+
+
+<div class="table_container">
+    <form method="POST">
+        {% csrf_token %}
+
+        <h4 class="mb-3">Добавить медикамент</h4>
+    
+        <div class="row g-3">
+            <div class="col-12">
+                <label for="name" class="form-label">Название медикамента</label>
+                {{ form.name }}
+                <div class="invalid-feedback">
+                    Требуется ввести название медикамента
+                </div>
+            </div>
+    
+            <div class="col-sm-6">
+                <label for="prise" class="form-label">Цена</label>
+                <div class="input-group">
+                    {{ form.prise }}
+                    <span class="input-group-text">₽</span>
+                    <div class="invalid-feedback">
+                        Цена продаваймого товара
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-sm-6">
+                <label for="count" class="form-label">Количество</label>
+                <div class="input-group">
+                    {{ form.count }}
+                    <div class="invalid-feedback">
+                        Количество продаваймого товара
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <hr class="my-4">
+
+        <button class="btn btn-primary btn-lg float-right" type="submit">Добавить</button>
+    </form>
+</div>
+
+{% endblock %}
