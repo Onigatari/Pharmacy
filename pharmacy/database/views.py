@@ -3,7 +3,7 @@ from .models import Medicines
 from .forms import MedicinesForm
 
 def database_home(request):
-    medicines = Medicines.objects.all()
+    medicines = Medicines.objects.order_by('name')
     return render(request, 'database/table.html', {'medicines': medicines})
 
 def create(request):
