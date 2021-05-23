@@ -19,10 +19,17 @@
             <li class="nav-item"><a href="{% url 'database_home' %}" class="nav-link active">Таблица</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Запросы</a></li>
         </ul>
-        <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-outline-primary me-2">Войти</button>
-            <button type="button" class="btn btn-primary">Регистрация</button>
-        </div>
+        {% if request.user.is_authenticated %}
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2">{{ request.user.username }}</button>
+                <a href="{% url 'logout' %}"><button type="button" class="btn btn-danger">Выйти</button></a>
+            </div>
+        {% else %}
+            <div class="col-md-3 text-end">
+                <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-primary me-2">Войти</button></a>
+                <button type="button" class="btn btn-primary">Регистрация</button>
+            </div>
+        {% endif %}
     </header>
 
     {% block content%}
