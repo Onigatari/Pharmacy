@@ -5,7 +5,7 @@ from .forms import MedicinesForm
 
 def database_home(request):
     if request.user.is_authenticated:
-        medicines = Medicines.objects.all()
+        medicines = Medicines.objects.order_by('name')
         return render(request, 'database/table.html', {'medicines': medicines})
     else:
         return HttpResponse('Ошибка')

@@ -14,8 +14,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-5 offset-1">
-            <h1>Запрос</h1>
+        <div class="col-4 offset-1">
+            <h1>Поиск</h1>
             <from action="">
                 <label for="drug">Препарат</label>
                 <input type="text" id="drug" class="form-control" name="city" placeholder="Введите название">
@@ -24,9 +24,11 @@
         </div>
         <div class="col-4 offset-1">
             <h1>Информация</h1>
-            <div class="alert alert-primary">
-                Глицин
-            </div>
+                {% for u in medicines|slice:":5" %}
+                    {% if u.count > 0 %}
+                        <div class="alert alert-primary">{{u.name}}: {{u.prise}} ₽ | {{u.count}} шт</div>
+                    {% endif %}
+                {% endfor %}
         </div>
     </div>
 </div>
