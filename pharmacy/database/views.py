@@ -20,7 +20,7 @@ def create(request):
     form = MedicinesForm()
 
     data = {
-        'form': form
+        'form': form,
     }
 
     return render(request, 'database/create.html', data)
