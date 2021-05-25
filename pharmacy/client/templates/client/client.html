@@ -1,7 +1,7 @@
 {% extends 'main/layout.html' %}
 {% load static %}
 
-{% block title %} Таблица {% endblock %}
+{% block title %} Клиенты {% endblock %}
 
 {% block content%}
 
@@ -19,12 +19,12 @@
             
         <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
-                <h1 class="my-0 mr-md-auto font-weight-normal">Медикаменты</h1>
+                <h1 class="my-0 mr-md-auto font-weight-normal">Клиенты</h1>
             </div>
 
             {% if request.user.is_superuser %}
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <a href="{% url 'create' %}">
+                    <a href="{% url 'add_client' %}">
                         <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>
                     </a>
                 </div>
@@ -35,20 +35,22 @@
             <thead class="table-primary">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Название</th>
-                    <th scope="col">Категория</th>
-                    <th scope="col">Цена</th>
-                    <th scope="col">Кол-во</th>
+                    <th scope="col">ФИО</th>
+                    <th scope="col">Адрес</th>
+                    <th scope="col">Возраст</th>
+                    <th scope="col">Телефон</th>
+                    <th scope="col">E-mail</th>
                 </tr>
             </thead>
             <tbody>
-                {% for u in medicines%}
+                {% for u in client%}
                     <tr>
                         <th scope="row">{{u.id}}</th>
                         <td>{{u.name}} </td>
-                        <td>{{u.category}} </td>
-                        <td>{{u.prise}} ₽</td>
-                        <td>{{u.count}}</td>
+                        <td>{{u.address}} </td>
+                        <td>{{u.age}}</td>
+                        <td>{{u.phone}}</td>
+                        <td>{{u.email}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
