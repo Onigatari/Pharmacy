@@ -1,4 +1,3 @@
-from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Medicines
 from .forms import MedicinesForm
@@ -9,9 +8,9 @@ def database_home(request):
 
 def create(request):
     if request.method == 'POST':
-        form_push = MedicinesForm(request.POST)
-        if form_push.is_valid():
-            form_push.save()
+        form = MedicinesForm(request.POST)
+        if form.is_valid():
+            form.save()
             return redirect('database_home')
 
     form = MedicinesForm()

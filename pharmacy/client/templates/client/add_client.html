@@ -20,44 +20,67 @@
 
         <h4 class="mb-3">Добавить клиента</h4>
 
-        <!-- <div class="row g-3">
+        <div class="row g-3">
             <div class="col-12">
-                <label for="name" class="form-label">Название медикамента</label>
+                <label for="name" class="form-label">Фамилия</label>
+                {{ form.surname }}
+                <div class="invalid-feedback">
+                    Требуется ввести фамилию
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="name" class="form-label">Имя</label>
                 {{ form.name }}
                 <div class="invalid-feedback">
-                    Требуется ввести название медикамента
+                    Требуется ввести имя
                 </div>
             </div>
 
-            <div class="col-sm-6">
-                <label for="prise" class="form-label">Цена</label>
-                <div class="input-group">
-                    {{ form.prise }}
-                    <span class="input-group-text">₽</span>
-                    <div class="invalid-feedback">
-                        Цена продаваймого товара
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6">
-                <label for="count" class="form-label">Количество</label>
-                <div class="input-group">
-                    {{ form.count }}
-                    <div class="invalid-feedback">
-                        Количество продаваймого товара
-                    </div>
+            <div class="col-12">
+                <label for="name" class="form-label">Отчество</label>
+                {{ form.patronymic }}
+                <div class="invalid-feedback">
+                    Требуется ввести отчество
                 </div>
             </div>
 
             <div class="col-sm-12">
-                <label for="count" class="form-label">Наименование категории</label>
+                <label for="prise" class="form-label">Адрес</label>
                 <div class="input-group">
-                    {{form.category}}
+                    {{ form.address }}
+                    <div class="invalid-feedback">
+                        Введите адрес клиента
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label for="count" class="form-label">Возраст</label>
+                <div class="input-group">
+                    {{ form.age }}
+                    <div class="invalid-feedback">
+                        Возраст клиента
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label for="count" class="form-label">Телефон</label>
+                <div class="input-group">
+                    <span class="input-group-text">+7</span>
+                    {{form.phone}}
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label for="count" class="form-label">E-mail</label>
+                <div class="input-group">
+                    {{form.email}}
                 </div>
             </div>
             
-        </div> -->
+        </div>
 
         <hr class="my-4">
 

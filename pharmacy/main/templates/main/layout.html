@@ -19,6 +19,7 @@
             <a href="{% url 'database_home' %}"><button type="button" class="btn btn-primary me-2">Таблица</button></a>
             {% if request.user.is_superuser %}
                 <a href="{% url 'client' %}"><button type="button" class="btn btn-primary me-2">Клиенты</button></a>
+                <a href="{% url 'orders' %}"><button type="button" class="btn btn-primary me-2">Заказы</button></a>
             {% endif %}
         </ul>
 

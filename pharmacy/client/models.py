@@ -1,14 +1,16 @@
 from django.db import models
 
 class Client(models.Model):
-    name = models.CharField('ФИО', max_length=300)
+    surname = models.CharField('Фамилия', max_length=300)
+    name = models.CharField('Имя', max_length=300)
+    patronymic = models.CharField('Отчество', max_length=300)
     address = models.CharField('Адрес', max_length=255)
     age = models.IntegerField('Возраст')
-    phone = models.CharField('Телефон', max_length=12)
+    phone = models.CharField('Телефон', max_length=10)
     email = models.EmailField('E-mail')
 
     def __str__(self):
-        return self.name
+        return self.surname + ' ' + self.name + ' ' + self.patronymic
 
     class Meta:
         verbose_name = 'Клиент'

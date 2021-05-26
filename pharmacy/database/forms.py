@@ -1,10 +1,5 @@
-from typing import List
-from django.db.models.enums import Choices, ChoicesMeta
-from django.db.models.fields.related import ForeignKey
-from django.forms.widgets import CheckboxInput, SelectMultiple
 from .models import Medicines
 from django.forms import ModelForm, TextInput, NumberInput, Select 
-
 
 class MedicinesForm(ModelForm):
     class Meta:

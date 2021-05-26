@@ -16,14 +16,14 @@
     <div class="row">
         <div class="col-4 offset-1">
             <h1>Поиск</h1>
-            <from action="">
+            <from action="" method="POST">
                 <label for="drug">Препарат</label>
                 <input type="text" id="drug" class="form-control" name="city" placeholder="Введите название">
                 <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-primary">
             </from>
         </div>
         <div class="col-4 offset-1">
-            <h1>Информация</h1>
+            <h1>Новинки</h1>
                 {% for u in medicines|slice:":5" %}
                     {% if u.count > 0 %}
                         <div class="alert alert-primary">{{u.name}}: {{u.prise}} ₽ | {{u.count}} шт</div>
