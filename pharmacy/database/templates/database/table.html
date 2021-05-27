@@ -5,55 +5,72 @@
 
 {% block content%}
 
-    <style type="text/css">
-        <!--
-        .table_container {
-            margin-top: 25px;
-            margin-left: 10em;
-            margin-right: 10em;
-        }
-        -->
-    </style>
+<style type="text/css">
+    <!--
+    .table_container {
+        margin-top: 25px;
+        margin-left: 10em;
+        margin-right: 10em;
+    }
+    -->
+</style>
 
-    <div class="table_container">
-            
-        <div class="row flex-nowrap justify-content-between align-items-center">
-            <div class="col-4 pt-1">
-                <h1 class="my-0 mr-md-auto font-weight-normal">Медикаменты</h1>
-            </div>
+<div class="table_container">
 
-            {% if request.user.is_superuser %}
-                <div class="col-4 d-flex justify-content-end align-items-center">
-                    <a href="{% url 'create' %}">
-                        <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>
-                    </a>
-                </div>
-            {% endif %}
+    <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-4 pt-1">
+            <h1 class="my-0 mr-md-auto font-weight-normal">Медикаменты</h1>
         </div>
 
-        <table class="table table-bordered table-striped table-hover">
-            <thead class="table-primary">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Название</th>
-                    <th scope="col">Категория</th>
-                    <th scope="col">Цена</th>
-                    <th scope="col">Кол-во</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for u in medicines%}
-                    <tr>
-                        <th scope="row">{{u.id}}</th>
-                        <td>{{u.name}} </td>
-                        <td>{{u.category}} </td>
-                        <td>{{u.prise}} ₽</td>
-                        <td>{{u.count}}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        {% if request.user.is_superuser %}
+        <div class="col-6 d-flex justify-content-end align-items-center">
+            <!-- <label for="count" class="form-label">Наименование категории</label> -->
+            <div class="input-group me-2">
+                <select class="form-select" id="category" required="">
+                    <option> Все </option>
+                    {% for u in category%}
+                        <option> {{u.name}} </option>
+                    {% endfor %}
+                  </select>
+                <!-- {{form.category}} -->
+            </div>
+            
+            <a href="" class = "me-2">
+                <button type="button" class="btn btn-primary px-4 fw-bold">Обновить</button>
+            </a>
+
+            <a href="{% url 'create' %}">
+                <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>
+            </a>
+        </div>
+        {% endif %}
     </div>
-    
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col"> # </th>
+                <th scope="col">Название</th>
+                <th scope="col">Категория</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Кол-во</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in medicines%}
+            <tr>
+                {% if u.count > 0 %}
+                    <th scope="row">{{u.id}}</th>
+                    <td>{{u.name}} </td>
+                    <td>{{u.category}} </td>
+                    <td>{{u.prise}} ₽</td>
+                    <td>{{u.count}}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 
 {% endblock %}
