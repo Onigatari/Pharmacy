@@ -15,13 +15,21 @@
     -->
 </style>
 
+
 <div class="table_container">
 
+    <form action="" method="GET">
+        {{ filter.as_p }}
+        <a href="" class = "me-2">
+            <button type="submit" value="Поиск" class="btn btn-primary px-4 fw-bold">Обновить</button>
+        </a>
+    </form>
+    
     <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col-4 pt-1">
             <h1 class="my-0 mr-md-auto font-weight-normal">Медикаменты</h1>
         </div>
-
+        
         {% if request.user.is_superuser %}
         <div class="col-6 d-flex justify-content-end align-items-center">
             <!-- <label for="count" class="form-label">Наименование категории</label> -->
@@ -63,7 +71,7 @@
                     <th scope="row">{{u.id}}</th>
                     <td>{{u.name}} </td>
                     <td>{{u.category}} </td>
-                    <td>{{u.prise}} ₽</td>
+                    <td>{{u.price}} ₽</td>
                     <td>{{u.count}}</td>
                 {% endif %}
             </tr>

@@ -1,12 +1,17 @@
 from .models import Orders
 from database.models import Medicines
 from client.models import Client
-from django.forms import ModelForm, CheckboxInput, DateInput, Select 
+from django.forms import ModelForm, CheckboxInput, DateInput, Select
+from django import forms
 
+class OrdersFilterForm(forms.Form):
+    select = forms.NullBooleanField(label='', required=False, widget=forms.TextInput(attrs={'type':  'checkbox', 'class': 'form-check-input'}))
+    
 class OrdersForm(ModelForm):
     class Meta:
         model = Orders
-        fields = ['medicines', 'client', 'registration_date', 'extradition_date', 'received']
+        fields = ['medicines', 'client', 'registration_date',
+                  'extradition_date', 'received']
 
         widgets = {
             'medicines': Select(attrs={
@@ -17,7 +22,7 @@ class OrdersForm(ModelForm):
                 'required': '',
             }),
             'client': Select(attrs={
-                'class': 'form-control',
+                'class': 'form-select',
                 'placeholder': 'Клиент',
                 'name': 'client',
                 'id': 'id_client',

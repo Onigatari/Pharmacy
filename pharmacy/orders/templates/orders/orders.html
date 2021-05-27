@@ -25,14 +25,14 @@
         {% if request.user.is_superuser %}
         <div class="col-6 d-flex justify-content-end align-items-center">
             <div class="input-group me-2">
-                <select onchange="table().set()" class="form-select" id="active" required="">
-                    <option value="adsa">Активные</option>
-                    <option value="adasdsa">Просроченные</option>
-                </select>
+                <form action="" method="GET">
+                    {{ filter }}
+                </form>
+            
             </div>
 
-            <a href="" class = "me-2">
-                <button type="button" class="btn btn-primary px-4 fw-bold">Обновить</button>
+            <a href="" class="me-2">
+                <button type="submit" class="btn btn-primary px-4 fw-bold">Обновить</button>
             </a>
 
             <a href="">
@@ -54,15 +54,13 @@
         </thead>
         <tbody>
             {% for u in orders%}
-            <tr>
-                {% if u.received == False and u.extradition_date > data %}
-                <th scope="row">{{u.id}}</th>
-                <td>{{ u.client.surname }} {{ u.client.name }} {{ u.client.patronymic }} </td>
-                <td>{{ u.medicines.name }} </td>
-                <td>{{ u.registration_date }} </td>
-                <td>{{ u.extradition_date }}</td>
-                {% endif %}
-            </tr>
+                <tr>
+                    <th scope="row">{{u.id}}</th>
+                    <td>{{ u.client.surname }} {{ u.client.name }} {{ u.client.patronymic }} </td>
+                    <td>{{ u.medicines.name }} </td>
+                    <td>{{ u.registration_date }} </td>
+                    <td>{{ u.extradition_date }}</td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>

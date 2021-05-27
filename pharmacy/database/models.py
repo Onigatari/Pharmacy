@@ -13,7 +13,7 @@ class Category(models.Model):
 class Medicines(models.Model):
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
     name = models.CharField('Название', max_length=255)
-    prise = models.FloatField('Цена')
+    price = models.FloatField('Цена')
     count = models.IntegerField('Кол-во')
 
     def __str__(self):

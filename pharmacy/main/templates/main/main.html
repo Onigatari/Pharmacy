@@ -26,7 +26,7 @@
             <h1>Новинки</h1>
                 {% for u in medicines|slice:":5" %}
                     {% if u.count > 0 %}
-                        <div class="alert alert-primary">{{u.name}}: {{u.prise}} ₽ | {{u.count}} шт</div>
+                        <div class="alert alert-primary">{{u.name}}: {{u.price}} ₽ | {{u.count}} шт</div>
                     {% endif %}
                 {% endfor %}
         </div>
