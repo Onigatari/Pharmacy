@@ -15,31 +15,38 @@
     -->
 </style>
 
-
 <div class="table_container">
-    
+
     <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col-4 pt-1">
-            <h1 class="my-0 mr-md-auto font-weight-normal">Медикаменты</h1>
+            <h1 class="my-0 mr-md-auto me-2 font-weight-normal">Медикаменты</h1>
         </div>
-        
+
         {% if request.user.is_superuser %}
         <div class="col-6 d-flex justify-content-end align-items-center">
-            <!-- <label for="count" class="form-label">Наименование категории</label> -->
-
-            <form class="inline-block">
-                <div class="form-group mx-sm-3 mb-2">
-                    {{ filter }}
-                    <button type="submit" class="btn btn-primary px-4 fw-bold">Обновить</button>
-                  </div>
-               
-            </form>
-
+            <a class="btn btn-primary px-4 fw-bol me-2" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Фильтр
+            </a>
             <a href="{% url 'create' %}">
                 <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>
             </a>
         </div>
         {% endif %}
+    </div>
+
+    <div class="collapse mb-2" id="collapseExample">
+        <div class="card card-body">
+            <form>
+                <div class="col-12 d-flex mb-2 justify-content-end align-items-center">
+                    <label for="category" class="form-label me-2">Категория: </label>
+                    {{ filter.select }}
+                </div>
+                <div class="col-12 d-flex justify-content-end align-items-center">
+                    <button type="submit" class="btn btn-primary px-4 fw-bold">Обновить</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <table class="table table-bordered table-striped table-hover">
@@ -56,11 +63,11 @@
             {% for u in medicines%}
             <tr>
                 {% if u.count > 0 %}
-                    <th scope="row">{{u.id}}</th>
-                    <td>{{u.name}} </td>
-                    <td>{{u.category}} </td>
-                    <td>{{u.price}} ₽</td>
-                    <td>{{u.count}}</td>
+                <th scope="row">{{u.id}}</th>
+                <td>{{u.name}} </td>
+                <td>{{u.category}} </td>
+                <td>{{u.price}} ₽</td>
+                <td>{{u.count}}</td>
                 {% endif %}
             </tr>
             {% endfor %}

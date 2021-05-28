@@ -128,6 +128,12 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS':{
+        'django_filters.rest_framework.DjangoFilterBackend'
+    }
+}
+
 LOGIN_REDIRECT_URL = '/'
 
 SESSION_COOKIE_AGE = 30 * 24 * 60 * 60

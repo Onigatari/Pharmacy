@@ -5,7 +5,7 @@ from django.forms import ModelForm, CheckboxInput, DateInput, Select
 from django import forms
 
 class OrdersFilterForm(forms.Form):
-    select = forms.NullBooleanField(label='', required=False, widget=forms.TextInput(attrs={'type':  'checkbox', 'class': 'form-check-input'}))
+    select = forms.NullBooleanField(label='', required=False, widget=forms.TextInput(attrs={'class': 'form-check-input'}))
     
 class OrdersForm(ModelForm):
     class Meta:

@@ -1,19 +1,12 @@
-from .models import Medicines
+from .models import Medicines, Category
 from django.forms import ModelForm, TextInput, NumberInput, Select
 from django import forms
-from .models import Category
-
 
 class MedicinesFilterForm(forms.Form):
     category = Category.objects.all()
-    CHOICE = [('Все', 'Все')]
-
-    for u in category:
-        CHOICE.append((u.name, u.name))
-
-    CHOICE = tuple(CHOICE)
-    select = forms.ChoiceField(label='',choices=CHOICE)
-
+    select = forms.ModelChoiceField(label='', required=False, queryset=category, widget=forms.Select(attrs={'class': 'form-select'}))
+    min_price = forms.FloatField(label='', required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    max_price = forms.FloatField(label='', required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 class MedicinesForm(ModelForm):
     class Meta:
