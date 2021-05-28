@@ -17,13 +17,6 @@
 
 
 <div class="table_container">
-
-    <form action="" method="GET">
-        {{ filter.as_p }}
-        <a href="" class = "me-2">
-            <button type="submit" value="Поиск" class="btn btn-primary px-4 fw-bold">Обновить</button>
-        </a>
-    </form>
     
     <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col-4 pt-1">
@@ -33,19 +26,14 @@
         {% if request.user.is_superuser %}
         <div class="col-6 d-flex justify-content-end align-items-center">
             <!-- <label for="count" class="form-label">Наименование категории</label> -->
-            <div class="input-group me-2">
-                <select class="form-select" id="category" required="">
-                    <option> Все </option>
-                    {% for u in category%}
-                        <option> {{u.name}} </option>
-                    {% endfor %}
-                  </select>
-                <!-- {{form.category}} -->
-            </div>
-            
-            <a href="" class = "me-2">
-                <button type="button" class="btn btn-primary px-4 fw-bold">Обновить</button>
-            </a>
+
+            <form class="inline-block">
+                <div class="form-group mx-sm-3 mb-2">
+                    {{ filter }}
+                    <button type="submit" class="btn btn-primary px-4 fw-bold">Обновить</button>
+                  </div>
+               
+            </form>
 
             <a href="{% url 'create' %}">
                 <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>

@@ -5,12 +5,12 @@ from .forms import MedicinesForm, MedicinesFilterForm
 def database_home(request):
     medicines = Medicines.objects.order_by('count')
     category = Category.objects.all()
-    filter = MedicinesFilterForm(request.GET)
-    if filter.is_valid():
-        if filter.cleaned_data['min_price']:
-            medicines = medicines.filter(price__gte=filter.cleaned_data['min_price'])
-        if filter.cleaned_data['max_price']:
-            medicines = medicines.filter(price__lte=filter.cleaned_data['max_price'])
+    filter = MedicinesFilterForm()
+    # if filter.is_valid():
+        # if filter.cleaned_data['min_price']:
+        #     medicines = medicines.objects.all().filter(category=2006)
+        # if filter.cleaned_data['max_price']:
+        #     medicines = medicines.filter(price__lte=filter.cleaned_data['max_price'])
             
     return render(request, 'database/table.html', {'medicines': medicines, 'category': category, 'filter': filter})
 
