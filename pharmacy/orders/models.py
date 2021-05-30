@@ -3,12 +3,22 @@ from datetime import date
 from database.models import Medicines
 from client.models import Client
 
+class StatusOrder(models.Model):
+    status = models.CharField(max_length=256)
+
+    def __str__(self):
+        return self.status
+
+    class Meta:
+        verbose_name = 'Статус'
+        verbose_name_plural = 'Статус'
+
 class Orders(models.Model):
     medicines = models.ForeignKey(Medicines, on_delete=models.PROTECT)
     client = models.ForeignKey(Client, on_delete=models.PROTECT)
+    received = models.ForeignKey(StatusOrder, on_delete=models.PROTECT, default=StatusOrder.objects.get(status="Активен"))
     registration_date = models.DateField('Время регистрации', default=date.today)
     extradition_date = models.DateField('Время выдачи')
-    received = models.BooleanField('Получин', default=False)
 
     def __str__(self):
         return self.client.surname + " " + self.client.name + " " +  self.client.patronymic + " | " + self.medicines.name

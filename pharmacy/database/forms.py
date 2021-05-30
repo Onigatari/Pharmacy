@@ -5,8 +5,6 @@ from django import forms
 class MedicinesFilterForm(forms.Form):
     category = Category.objects.all()
     select = forms.ModelChoiceField(label='', required=False, queryset=category, widget=forms.Select(attrs={'class': 'form-select'}))
-    min_price = forms.FloatField(label='', required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    max_price = forms.FloatField(label='', required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 class MedicinesForm(ModelForm):
     class Meta:

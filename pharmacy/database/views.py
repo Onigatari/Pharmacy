@@ -11,7 +11,6 @@ def database_home(request):
         if filter.cleaned_data['select']:
             medicines = Medicines.objects.filter(category__exact=filter.cleaned_data['select'])
             
-
     return render(request, 'database/table.html', {'medicines': medicines, 'filter': filter})
 
 def create(request):
@@ -28,3 +27,25 @@ def create(request):
     }
 
     return render(request, 'database/create.html', data)
+
+def edit(request, id):
+    try:
+        medicines = Medicines.objects.get(id=id)
+ 
+        if request.method == "POST":
+            medicines.price = request.POST.get("price")
+            medicines.count = request.POST.get("count")
+            medicines.save()
+            return redirect('database_home')
+        else:
+            return render(request, "edit_table.html.html", {"medicines": medicines})
+    except Medicines.DoesNotExist:
+        return redirect('database_home')
+     
+def delete(request, id):
+    try:
+        medicines = Medicines.objects.get(id=id)
+        medicines.delete()
+        return redirect('database_home')
+    except Medicines.DoesNotExist:
+        return redirect('database_home')

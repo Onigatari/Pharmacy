@@ -15,4 +15,4 @@ def add_client_view(request):
 
     form = ClientForm()
 
-    return render(request, 'client/add_client.html', {'form': form})
+    return render(request, 'client/add_client.html', {'form': form })

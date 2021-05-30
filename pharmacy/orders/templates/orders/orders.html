@@ -9,8 +9,8 @@
     <!--
     .table_container {
         margin-top: 25px;
-        margin-left: 10em;
-        margin-right: 10em;
+        margin-left: 8em;
+        margin-right: 8em;
     }
     -->
 </style>
@@ -27,7 +27,7 @@
                 data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 Фильтр
             </a>
-            <a href="">
+            <a href="{% url 'add_order' %}">
                 <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>
             </a>
         </div>
@@ -36,8 +36,14 @@
 
     <div class="collapse mb-2" id="collapseExample">
         <div class="card card-body">
-            <form>
-                
+            <form>               
+                <div class="d-flex mb-2 justify-content-end align-items-center">
+                    <label for="category" class="form-label me-2">Получен: </label>
+                    {{ filter.status }}
+                </div>
+                <div class="col-12 d-flex justify-content-end align-items-center">
+                    <button type="submit" class="btn btn-primary px-4 fw-bold">Обновить</button>
+                </div>
             </form>
         </div>
     </div>
@@ -50,6 +56,8 @@
                 <th scope="col"> Медикамент </th>
                 <th scope="col"> Дата регистрации </th>
                 <th scope="col"> Дата выдачи </th>
+                <th scope="col"> Статус </th>
+                <th scope="col"> Редактировать </th>
             </tr>
         </thead>
         <tbody>
@@ -60,6 +68,15 @@
                 <td>{{ u.medicines.name }} </td>
                 <td>{{ u.registration_date }} </td>
                 <td>{{ u.extradition_date }}</td>
+                {% if u.received.status == "Активен" %}
+                    <td class="table-warning">{{ u.received }}</td>
+                {% elif u.received.status == "Просрочен" %}
+                    <td class="table-danger">{{ u.received }}</td>
+                {% elif u.received.status == "Доставлен" %}
+                    <td class="table-success">{{ u.received }}</td>
+                {% endif %}
+                <td><a class="badge bg-success" href="get/{{u.id}}">Доставлен</a>
+                    <a class="badge bg-danger" href="delete/{{u.id}}">Удалить</a></td>
             </tr>
             {% endfor %}
         </tbody>

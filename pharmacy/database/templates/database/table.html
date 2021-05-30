@@ -21,18 +21,18 @@
         <div class="col-4 pt-1">
             <h1 class="my-0 mr-md-auto me-2 font-weight-normal">Медикаменты</h1>
         </div>
-
-        {% if request.user.is_superuser %}
+        
         <div class="col-6 d-flex justify-content-end align-items-center">
             <a class="btn btn-primary px-4 fw-bol me-2" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 Фильтр
             </a>
+            {% if request.user.is_superuser %}
             <a href="{% url 'create' %}">
                 <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>
             </a>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 
     <div class="collapse mb-2" id="collapseExample">

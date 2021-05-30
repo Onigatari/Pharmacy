@@ -1,0 +1,46 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Новый заказ {% endblock %}
+
+{% block content%}
+<style type="text/css">
+    <!--
+    .table_container {
+        margin-top: 25px;
+        margin-left: 15em;
+        margin-right: 15em;
+    }
+    -->
+</style>
+
+<div class="table_container">
+    <form method="POST">
+        {% csrf_token %}
+
+        <h4 class="mb-3">Добавить новый заказ</h4>
+
+        <div class="row g-3">
+            <div class="col-12">
+                <label for="name" class="form-label">Клиент</label>
+                {{ form.client }}
+            </div>
+
+            <div class="col-12">
+                <label for="price" class="form-label">Медикамент</label>
+                {{ form.medicines }}
+            </div>
+
+            <div class="col-12">
+                <label for="count" class="form-label">Ожидаемое время получения</label>
+                {{ form.extradition_date }}
+            </div>
+
+        </div>
+
+        <hr class="my-4">
+
+        <button class="btn btn-primary btn-lg float-right" type="submit">Добавить</button>
+    </form>
+</div>
+
+{% endblock %}
