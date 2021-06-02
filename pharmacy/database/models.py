@@ -15,6 +15,7 @@ class Medicines(models.Model):
     name = models.CharField('Название', max_length=255)
     price = models.FloatField('Цена')
     count = models.IntegerField('Кол-во')
+    popularity = models.IntegerField('Попоулярность', default=0)
 
     def __str__(self):
         return self.name

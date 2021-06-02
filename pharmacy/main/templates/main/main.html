@@ -16,21 +16,36 @@
     <div class="row">
         <div class="col-4 offset-1">
             <h1>Поиск</h1>
-            <from action="" method = 'GET'>
-                <label>Препарат</label>
-                <input type="text" class="form-control" name="search" placeholder="Введите название">
+            <form action="" method="GET">
+                <input type="text" class="form-control" name="q" placeholder="Введите название">
                 <button type="submit" class="mt-2 btn btn-primary">Узнать</button>
-            </from>
-        </div>
-        <div class="col-4 offset-1">
-            <h1>Новинки</h1>
-                {% for u in medicines|slice:":5" %}
+            </form>
+
+            <div class="mt-4">
+                {% for u in find|slice:":10" %}
                     {% if u.count > 0 %}
-                        <div class="alert alert-primary">{{u.name}}: {{u.price}} ₽ | {{u.count}} шт</div>
+                    <div class="alert alert-success">{{u.name}}: {{u.price}} ₽ | {{u.count}} шт</div>
                     {% endif %}
                 {% endfor %}
+            </div>
+        </div>
+        <div class="col-4 offset-1">
+            <h1>Отчеты</h1>
+
+            <a href='./database/?select=&sort=-popularity' class='btn btn-primary mb-2'>Перечень наиболее часто
+                используемых медикаментов</a>
+            <a href='./orders/?status=1&find_category=&find_medicines=' class='btn btn-primary mb-2'>Полный перечень и
+                общее число заказов, находящихся в производстве</a>
+            <a href='./orders/?status=3&find_category=&find_medicines=' class='btn btn-primary mb-2'>Перечень
+                покупателей, которые не пришли забрать свой заказ в назначенное им время</a>
+
+
+            <!-- {% for u in medicines|slice:":5" %}
+            {% if u.count > 0 %}
+            <div class="alert alert-primary">{{u.name}}: {{u.price}} ₽ | {{u.count}} шт</div>
+            {% endif %}
+        {% endfor %} -->
         </div>
     </div>
-</div>
 
-{% endblock %}
+    {% endblock %}

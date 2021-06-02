@@ -5,7 +5,7 @@ class Client(models.Model):
     name = models.CharField('Имя', max_length=300)
     patronymic = models.CharField('Отчество', max_length=300)
     address = models.CharField('Адрес', max_length=255)
-    age = models.IntegerField('Возраст')
+    date_of_birth = models.DateField('Дата рождения')
     phone = models.CharField('Телефон', max_length=10)
     email = models.EmailField('E-mail')
 

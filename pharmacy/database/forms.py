@@ -4,7 +4,17 @@ from django import forms
 
 class MedicinesFilterForm(forms.Form):
     category = Category.objects.all()
+    
+    sort_choices =(
+        ("id", "---------"),
+        ("price", "Цена"),
+        ("name", "Название"),
+        ("-popularity", "Популярность"),
+        ("count", "Количество"),
+    )
+
     select = forms.ModelChoiceField(label='', required=False, queryset=category, widget=forms.Select(attrs={'class': 'form-select'}))
+    sort = forms.ChoiceField(label='', choices=sort_choices, required=False, widget=forms.Select(attrs={'class': 'form-select'}))
 
 class MedicinesForm(ModelForm):
     class Meta:
@@ -25,10 +35,10 @@ class MedicinesForm(ModelForm):
             }),
             'price': NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Цена товара'
+                'placeholder': 'Цена товара',
             }),
             'count': TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Количество товара'
+                'placeholder': 'Количество товара',
             })
         }

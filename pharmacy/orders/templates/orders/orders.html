@@ -12,16 +12,19 @@
         margin-left: 8em;
         margin-right: 8em;
     }
+
+    a:hover {
+        color: rgb(240, 240, 240);
+    }
     -->
 </style>
 
 <div class="table_container">
-    <div class="row flex-nowrap justify-content-between align-items-center">
+    <div class="row flex-nowrap justify-content-between align-items-center mb-4">
         <div class="col-4 pt-1">
             <h1 class="my-0 mr-md-auto font-weight-normal">Заказы</h1>
         </div>
 
-        {% if request.user.is_superuser %}
         <div class="col-6 d-flex justify-content-end align-items-center">
             <a class="btn btn-primary px-4 fw-bol me-2" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -31,16 +34,24 @@
                 <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>
             </a>
         </div>
-        {% endif %}
     </div>
 
     <div class="collapse mb-2" id="collapseExample">
         <div class="card card-body">
-            <form>               
+            <form>
                 <div class="d-flex mb-2 justify-content-end align-items-center">
                     <label for="category" class="form-label me-2">Получен: </label>
                     {{ filter.status }}
                 </div>
+                <div class="d-flex mb-2 justify-content-end align-items-center">
+                    <label for="category" class="form-label me-2">Категория: </label>
+                    {{ filter.find_category }}
+                </div>
+                <div class="d-flex mb-2 justify-content-end align-items-center">
+                    <label for="category" class="form-label me-2">Медикамент: </label>
+                    {{ filter.find_medicines}}
+                </div>
+                
                 <div class="col-12 d-flex justify-content-end align-items-center">
                     <button type="submit" class="btn btn-primary px-4 fw-bold">Обновить</button>
                 </div>
@@ -54,7 +65,7 @@
                 <th scope="col"> # </th>
                 <th scope="col"> Клиент </th>
                 <th scope="col"> Медикамент </th>
-                <th scope="col"> Дата регистрации </th>
+                <th scope="col"> Дата оформления </th>
                 <th scope="col"> Дата выдачи </th>
                 <th scope="col"> Статус </th>
                 <th scope="col"> Редактировать </th>
@@ -69,15 +80,20 @@
                 <td>{{ u.registration_date }} </td>
                 <td>{{ u.extradition_date }}</td>
                 {% if u.received.status == "Активен" %}
-                    <td class="table-warning">{{ u.received }}</td>
+                <td class="table-warning">{{ u.received }}</td>
                 {% elif u.received.status == "Просрочен" %}
-                    <td class="table-danger">{{ u.received }}</td>
+                <td class="table-danger">{{ u.received }}</td>
                 {% elif u.received.status == "Доставлен" %}
-                    <td class="table-success">{{ u.received }}</td>
+                <td class="table-success">{{ u.received }}</td>
                 {% endif %}
                 <td><a class="badge bg-success" href="get/{{u.id}}">Доставлен</a>
-                    <a class="badge bg-danger" href="delete/{{u.id}}">Удалить</a></td>
+                    <a class="badge bg-danger" href="delete/{{u.id}}">Удалить</a>
+                </td>
             </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center table-warning"><strong>Заказов нет!</strong></td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>

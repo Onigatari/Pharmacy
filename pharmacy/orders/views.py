@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Orders, StatusOrder
+from database.models import Medicines, Category
 from .forms import OrdersForm, OrdersFilterForm
 from datetime import date
 
@@ -28,8 +29,13 @@ def order_index(request):
     filter = OrdersFilterForm(request.GET)
 
     if filter.is_valid():
+        orders = Orders.objects.all()
         if filter.cleaned_data['status']:
-            orders = Orders.objects.filter(received__exact=filter.cleaned_data['status'])
+            orders = orders.filter(received__exact=filter.cleaned_data['status'])
+        if filter.cleaned_data['find_category']:
+            orders = orders.filter(medicines__category__exact=filter.cleaned_data['find_category'])
+        if filter.cleaned_data['find_medicines']:
+            orders = orders.filter(medicines__exact=filter.cleaned_data['find_medicines'])
 
     return render(request, 'orders/orders.html', {'orders': orders, 'filter': filter }) 
 
@@ -37,10 +43,15 @@ def add_order(request):
     if request.method == 'POST':
         form = OrdersForm(request.POST)
         if form.is_valid():
+            item = Medicines.objects.get(pk=request.POST['medicines'])
+            item.count = item.count - 1
+            item.popularity = item.popularity + 1
+            item.save()
             form.save()
             return redirect('orders')
 
     form = OrdersForm()
+    
     
     return render(request, 'orders/add_order.html', { 'form': form })
 

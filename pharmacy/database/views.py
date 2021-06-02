@@ -3,13 +3,16 @@ from .models import Medicines, Category
 from .forms import MedicinesForm, MedicinesFilterForm
 
 def database_home(request):
-    medicines = Medicines.objects.order_by('price')
-    
     filter = MedicinesFilterForm(request.GET)
-    
+    medicines = Medicines.objects.order_by('id')
+
     if filter.is_valid():
+        medicines = Medicines.objects.all()
+        if filter.cleaned_data['sort']:
+            medicines = medicines.order_by(filter.cleaned_data['sort'])
         if filter.cleaned_data['select']:
-            medicines = Medicines.objects.filter(category__exact=filter.cleaned_data['select'])
+            medicines = medicines.filter(category__exact=filter.cleaned_data['select'])
+        
             
     return render(request, 'database/table.html', {'medicines': medicines, 'filter': filter})
 

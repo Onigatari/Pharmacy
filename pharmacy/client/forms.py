@@ -1,10 +1,11 @@
+from django.forms.widgets import DateInput
 from .models import Client
 from django.forms import ModelForm, TextInput, NumberInput
 
 class ClientForm(ModelForm):
     class Meta:
         model = Client
-        fields = ['surname', 'name', 'patronymic', 'address', 'age', 'phone', 'email']
+        fields = ['surname', 'name', 'patronymic', 'address', 'date_of_birth', 'phone', 'email']
 
         widgets = {
             'surname': TextInput(attrs={
@@ -23,9 +24,11 @@ class ClientForm(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Адрес',
             }),
-            'age': NumberInput(attrs={
+            'date_of_birth': DateInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Возраст'
+                'placeholder': 'Дата рождения',
+                'type': 'date', 
+                'id': 'example-date-input',
             }),
             'phone': TextInput(attrs={
                 'class': 'form-control',

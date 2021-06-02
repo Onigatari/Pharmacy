@@ -19,11 +19,9 @@
     <header class="d-flex justify-content-center py-3 bg-light">
         <ul class="nav nav-pills">
             <a href="{% url 'main' %}"><button type="button" class="btn btn-primary me-2">Главная страница</button></a>
-            <a href="{% url 'database_home' %}"><button type="button" class="btn btn-primary me-2">Таблица</button></a>
-            {% if request.user.is_superuser %}
-                <a href="{% url 'client' %}"><button type="button" class="btn btn-primary me-2">Клиенты</button></a>
-                <a href="{% url 'orders' %}"><button type="button" class="btn btn-primary me-2">Заказы</button></a>
-            {% endif %}
+            <a href="{% url 'database_home' %}"><button type="button" class="btn btn-primary me-2">Медикаменты</button></a>
+            <a href="{% url 'client' %}"><button type="button" class="btn btn-primary me-2">Клиенты</button></a>
+            <a href="{% url 'orders' %}"><button type="button" class="btn btn-primary me-2">Заказы</button></a>
         </ul>
 
         {% if request.user.is_authenticated %}
