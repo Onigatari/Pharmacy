@@ -5,10 +5,9 @@ from django.contrib.auth import login
 from .forms import UserRegisterForm, AutoForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-    
+
 class logout_view(LogoutView):
     next_page = '/'
-
 def login_view(request):
     if request.method == 'POST':
         form = AutoForm(data = request.POST)

@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Medicines, Category
 from .forms import MedicinesForm, MedicinesFilterForm
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def database_home(request):
     filter = MedicinesFilterForm(request.GET)
     medicines = Medicines.objects.order_by('id')
@@ -16,6 +18,7 @@ def database_home(request):
             
     return render(request, 'database/table.html', {'medicines': medicines, 'filter': filter})
 
+@login_required
 def create(request):
     if request.method == 'POST':
         form = MedicinesForm(request.POST)
@@ -31,6 +34,7 @@ def create(request):
 
     return render(request, 'database/create.html', data)
 
+@login_required
 def edit(request, id):
     try:
         medicines = Medicines.objects.get(id=id)
@@ -44,7 +48,8 @@ def edit(request, id):
             return render(request, "edit_table.html.html", {"medicines": medicines})
     except Medicines.DoesNotExist:
         return redirect('database_home')
-     
+
+@login_required 
 def delete(request, id):
     try:
         medicines = Medicines.objects.get(id=id)

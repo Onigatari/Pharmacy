@@ -3,7 +3,9 @@ from .models import Orders, StatusOrder
 from database.models import Medicines, Category
 from .forms import OrdersForm, OrdersFilterForm
 from datetime import date
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def order_index(request):
     orders = Orders.objects.order_by('registration_date')
 
@@ -39,6 +41,7 @@ def order_index(request):
 
     return render(request, 'orders/orders.html', {'orders': orders, 'filter': filter }) 
 
+@login_required
 def add_order(request):
     if request.method == 'POST':
         form = OrdersForm(request.POST)
@@ -55,6 +58,7 @@ def add_order(request):
     
     return render(request, 'orders/add_order.html', { 'form': form })
 
+@login_required
 def order_get(request, id):
     try:
         order = Orders.objects.get(id=id)
@@ -65,6 +69,7 @@ def order_get(request, id):
     except Orders.DoesNotExist:
         return redirect('orders')
 
+@login_required
 def order_delete(request, id):
     try:
         order = Orders.objects.get(id=id)
