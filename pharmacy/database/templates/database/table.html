@@ -17,9 +17,11 @@
                 data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 Фильтр
             </a>
-            <a href="{% url 'create' %}">
-                <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>
-            </a>
+            {% if user.is_superuser %}  
+                <a href="{% url 'create' %}">
+                    <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>
+                </a>
+            {% endif %}
         </div>
     </div>
 

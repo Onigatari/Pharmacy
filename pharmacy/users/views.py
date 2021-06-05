@@ -9,6 +9,8 @@ from django.contrib import messages
 class logout_view(LogoutView):
     next_page = '/'
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('main')
     if request.method == 'POST':
         form = AutoForm(data = request.POST)
         if form.is_valid():

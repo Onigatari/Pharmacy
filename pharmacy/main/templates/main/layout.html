@@ -44,11 +44,8 @@
 
         {% if request.user.is_authenticated %}
         <div class="col-md-3 text-end">
-            {% if request.user.is_superuser %}
             <a href="/admin/"><button type="button" class="btn btn-primary me-2">{{ request.user.username }}</button></a>
-            {% else %}
-                <button type="button" class="btn btn-primary me-2">{{ request.user.username }}</button>
-            {% endif %}
+
             <a href="{% url 'logout' %}"><button type="button" class="btn btn-danger">Выйти</button></a>
         </div>
         {% else %}

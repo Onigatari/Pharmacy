@@ -16,9 +16,11 @@
                 data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 Фильтр
             </a>
-            <a href="{% url 'add_order' %}">
-                <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>
-            </a>
+            {% if user.is_superuser %}  
+                <a href="{% url 'add_order' %}">
+                    <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>
+                </a>
+            {% endif %}
         </div>
     </div>
 
@@ -54,7 +56,9 @@
                 <th scope="col"> Дата оформления </th>
                 <th scope="col"> Дата выдачи </th>
                 <th scope="col"> Статус </th>
-                <th scope="col"> Редактировать </th>
+                {% if user.is_superuser %}
+                    <th scope="col"> Редактировать </th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -72,9 +76,11 @@
                 {% elif u.received.status == "Доставлен" %}
                 <td class="table-success">{{ u.received }}</td>
                 {% endif %}
-                <td><a class="badge bg-success" href="get/{{u.id}}">Доставлен</a>
-                    <a class="badge bg-danger" href="delete/{{u.id}}">Удалить</a>
-                </td>
+                {% if user.is_superuser %}
+                    <td><a class="badge bg-success" href="get/{{u.id}}">Доставлен</a>
+                        <a class="badge bg-danger" href="delete/{{u.id}}">Удалить</a>
+                    </td>
+                {% endif %}
             </tr>
             {% empty %}
                 <tr>

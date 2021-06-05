@@ -11,11 +11,13 @@
                 <h1 class="my-0 mr-md-auto font-weight-normal">Клиенты</h1>
             </div>
 
-            <div class="col-4 d-flex justify-content-end align-items-center">
-                <a href="{% url 'add_client' %}">
-                    <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>
-                </a>
-            </div>
+            {% if user.is_superuser %}  
+                <div class="col-4 d-flex justify-content-end align-items-center">
+                    <a href="{% url 'add_client' %}">
+                        <button type="button" class="btn btn-primary px-4 fw-bold">Добавить</button>
+                    </a>
+                </div>
+            {% endif %}
         </div>
 
         <table class="table table-bordered table-striped table-hover">
